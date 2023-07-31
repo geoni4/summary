@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 번호와 가위바위보 게임</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    @font-face {
+    font-family: 'neurimboGothicRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/neurimboGothicRegular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    }   
+    body{ 
+        font-family: 'neurimboGothicRegular';
+        font-size: 22px;
+    }
+    footer.nav {
+      bottom: 0px;
+      position: absolute;
+      height: 10rem;
+    }
+    #you_pic, #com_pic {
+        width: 18rem;
+        height: 18rem;
+    }
+  
+</style>
+
+
+<body class="d-flex vw-100 vh-100 text-center flex-column justify-content-between"><!--분할하는거-->
+  <header>
+    <!--위에 네비게이션 바-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid" >
+        <a class="navbar-brand" href="#">게임</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">가위바위보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./lotto.html">로또</a>
+            </li>
+
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class = "d-flex justify-content-evenly" >
+        
+        <div id = "you" style="width: 18rem ">
+            <div>
+                <img id = "you_pic" src = "./me.png">
+            </div>
+            <p>ME</p> <!--ME가위바위보 버튼-->
+            <button type="button" onclick="userChoice('가위')">가위</button>
+            <button type="button" onclick="userChoice('바위')">바위</button>
+            <button type="button" onclick="userChoice('보')">보</button>
+        </div>
+    
+        <!-- 사진 -->
+        <div id = "judge" style="width: 20rem" >
+            <div>
+                <img id = "judge_pic" src = "./judge2.png" >
+            </div>    
+            <p>심판</p>
+            <p id="result"></p>
+        </div>
+    
+        <div id = "computer" style="width: 20rem">
+            <div>
+                <img id = "com_pic" src = "./com.png">
+            </div>
+            <p>COM</p>
+        </div>
+
+    </div>
+
+
+ 
+       
+    <br>
+    
+
+
+    <script>
+      // 가위바위보 게임
+      function userChoice(user) {
+        const choices = ['가위', '바위', '보'];
+        const computer = choices[Math.floor(Math.random() * choices.length)];
+        let result = '';
+
+
+        if(user === '가위'){
+            document.querySelector("#you_pic").src='./scissors.png';
+        } else if(user ==='바위'){
+            document.querySelector("#you_pic").src='./rock.png';
+        } else { document.querySelector("#you_pic").src='./paper.png'; }
+
+        if(computer === '가위'){
+            document.querySelector("#com_pic").src='./scissors.png';
+        } else if(computer ==='바위'){
+            document.querySelector("#com_pic").src='./rock.png';
+        } else { document.querySelector("#com_pic").src='./paper.png'; }
+
+
+
+        if (user === computer) {
+            result = '비겼습니다!';
+        } else if (
+        (user === '가위' && computer === '보') ||
+        (user === '바위' && computer === '가위') ||
+        (user === '보' && computer === '바위')
+        ) {
+        result = '사용자가 이겼습니다!';
+        } else if (
+        (user === '가위' && computer === '바위') ||
+        (user === '바위' && computer === '보') ||
+        (user === '보' && computer === '가위')
+        ) {
+        result = '컴퓨터가 이겼습니다!';
+        }
+
+        const resultElement = document.getElementById("result");
+        
+        resultElement.textContent = result;
+      }
+    </script>
+
+  </main>
+
+
+  <footer class="align-bottom p-4" >
+    <nav class="text-center">
+        <hr>
+        ⓒ AliceSeo 2023
+    </nav>
+</footer>
+  
+    
+</body>
+</html>
